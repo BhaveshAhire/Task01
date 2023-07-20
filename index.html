@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h2>TO DO LIST 
+            <img src="icon.png" alt="">
+            </h2>
+            <div class="text">
+                <input type="text" id="text" placeholder="Add the Task To Do">
+                <button onclick="addTask()">ADD</button>
+            </div>
+            <ul id="list">
+                <!-- <li class="checked">Task1</li>
+                <li>Task2</li>
+                <li>Task3</li> -->
+            </ul>
+        </div>
+
+    </div>
+    
+    <Script>
+            const inputBox = document.getElementById("text");
+const listContainer = document.getElementById("list");
+function addTask(){
+    if(inputBox.value ==='')
+    {
+        alert("Please write something");
+    }
+    else
+    {
+        let li = document.createElement("li");
+        li.innerHTML = inputBox.value;
+        listContainer.appendChild(li);
+        let span = document.createElement("span");
+        span.innerHTML = "\u00d7";
+        li.appendChild(span); 
+    }
+    inputBox.value="";
+    save();
+}
+
+listContainer.addEventListener("click",function(e)
+{
+    if(e.target.tagName === "LI")
+       {
+        e.target.classList.toggle("checked");
+        save();
+       }
+       else if(e.target.tagName==="SPAN")
+       {
+        e.target.parentElement.remove();
+        save();
+       }
+},false)
+
+function save()
+{
+    localStorage.setItem("data",listContainer.innerHTML);
+}
+
+function show()
+{
+    listContainer.innerHTML = localStorage.getItem("data");
+}
+show();
+
+    </Script>
+</body>
+</html>
